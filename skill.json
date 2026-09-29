@@ -1,0 +1,40 @@
+{
+  "name": "genpark-proactive-intent-disambiguation-clarifier-skill",
+  "version": "1.0.0",
+  "description": "Proactive High-Stakes Intent Disambiguator & Option Clarifier. Detects under-specified user goals, assesses reversibility and risk, and constructs minimal multiple-choice clarifications before triggering autonomous execution.",
+  "tools": [
+    {
+      "name": "disambiguate_intent",
+      "description": "Analyze user prompt ambiguity, assess execution risk, generate structured clarification options, and resolve intent.",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "action": {
+            "type": "string",
+            "enum": [
+              "analyze_ambiguity",
+              "generate_clarification",
+              "resolve_selection"
+            ],
+            "description": "The disambiguation action."
+          },
+          "prompt": {
+            "type": "string",
+            "description": "The user prompt to analyze."
+          },
+          "selection_index": {
+            "type": "integer",
+            "description": "Selected option index when resolving clarification."
+          },
+          "custom_writein": {
+            "type": "string",
+            "description": "Custom user write-in answer if not selecting predefined options."
+          }
+        },
+        "required": [
+          "action"
+        ]
+      }
+    }
+  ]
+}
