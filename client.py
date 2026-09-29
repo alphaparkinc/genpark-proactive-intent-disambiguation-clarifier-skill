@@ -22,7 +22,7 @@ class ProactiveIntentDisambiguationClarifier:
         prompt_lower = prompt.lower()
         detected_risks = []
         for kw, risk_type in self.IRREVERSIBLE_KEYWORDS.items():
-            if re.search(r"\b" + kw + r"\b", prompt_lower):
+            if re.search(r"" + kw + r"", prompt_lower):
                 detected_risks.append({"keyword": kw, "risk_type": risk_type})
                 
         # Ambiguity heuristics
@@ -36,7 +36,7 @@ class ProactiveIntentDisambiguationClarifier:
         if has_missing_target: ambiguity_score += 0.25
         
         ambiguity_score = min(1.0, ambiguity_score)
-        needs_clarification = ambiguity_score > 0.45 or len(detected_risks) > 0
+        needs_clarification = ambiguity_score >= 0.35 or len(detected_risks) > 0
         
         risk_tier = "low"
         if detected_risks:
